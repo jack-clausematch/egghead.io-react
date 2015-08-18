@@ -1,22 +1,32 @@
 var App = React.createClass({
   getInitialState:function(){
     return {
-      txt: 'this is a default prop',
-      id: 0
-    }
+      txt: ''
+    };
   },
   update: function (e) {
     this.setState({ txt: e.target.value });
   },
-  render:function(){
-    var txt = this.state.txt
+  render:function () {
     return (
       <div>
-        <input type="type" onChange={this.update} />
-        <h1>{txt}</h1>
+        <Widget txt={this.state.txt || this.props.txt } update={this.update}></Widget>
+        <Widget txt={this.state.txt || this.props.txt } update={this.update}></Widget>
+        <Widget txt={this.state.txt || this.props.txt } update={this.update}></Widget>
       </div>
     );
   }
 });
 
-React.render(<App />, document.body);
+var Widget = React.createClass({
+  render: function () {
+    return (
+      <div>
+        <input type="type" onChange={this.props.update} />
+        <h1>{this.props.txt}</h1>
+      </div>
+    );
+  }
+});
+
+React.render(<App txt="TXT_PROP" />, document.body);
